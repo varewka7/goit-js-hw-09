@@ -23,11 +23,11 @@ const options = {
         return ;
       }
      return Notiflix.Notify.failure('Please choose a date in the future');
-      
+     
     } else {
 this.isActive = true,
       startBtn.addEventListener('click', createClock)
-     
+      
       function createClock() { 
         timer = setInterval(() => {
           this.isActive = true;
@@ -36,18 +36,28 @@ this.isActive = true,
           const finishTime = selectedDates[0];
           const ms = finishTime - currentTime;
           
+          
           const { days, hours, minutes, seconds } = convertMs(ms)
           d.textContent = addLeadingZero(days);
           h.textContent = addLeadingZero(hours);
           m.textContent = addLeadingZero(minutes);
           s.textContent = addLeadingZero(seconds);
+
+        
+  if (ms < 1000) {
+    clearInterval(timer);
+    startBtn.disabled = false;
+  }
         }, 1000)
       }
     }
+     
   }
 }
 
 flatpickr('input#datetime-picker', options);
+
+
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -55,6 +65,8 @@ function convertMs(ms) {
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
+
+  
 
   // Remaining days
   const days = (Math.floor(ms / day));
@@ -65,9 +77,11 @@ function convertMs(ms) {
   // Remaining seconds
   const seconds = (Math.floor((((ms % day) % hour) % minute) / second));
 
-  return { days, hours, minutes, seconds } ;
+  return { days, hours, minutes, seconds };
+  
 }
 
 function addLeadingZero(value) {
    return String(value).padStart(2,0)
 };
+
