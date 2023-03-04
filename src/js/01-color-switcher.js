@@ -15,8 +15,6 @@ const color = {
         if (this.isActive) {
             return;
         }
-
-    // let changeColor = getRandomHexColor();
     this.isActive = true; 
 
         this.intervalId = setInterval(() => {

@@ -9,11 +9,6 @@ const h = document.querySelector('[data-hours]');
 const m = document.querySelector('[data-minutes]');
 const s = document.querySelector('[data-seconds]');
 
-// console.log(d);
-// console.log(h);
-// console.log(m);
-// console.log(s);
-
 let timer = null;
 
 const options = {
