@@ -12,25 +12,23 @@ const s = document.querySelector('[data-seconds]');
 let timer = null;
 
 const options = {
-  isActive: false,
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] <= new Date()) {
-      if (this.isActive) { 
-        return ;
-      }
-     return Notiflix.Notify.failure('Please choose a date in the future');
-     
+    
+      Notiflix.Notify.failure('Please choose a date in the future');
+      //  startBtn.disabled = true;
+      return;
     } else {
-this.isActive = true,
+      // startBtn.disabled = false;
       startBtn.addEventListener('click', createClock)
       
       function createClock() { 
         timer = setInterval(() => {
-          this.isActive = true;
+
           startBtn.disabled = true;
           const currentTime = Date.now();
           const finishTime = selectedDates[0];
@@ -47,6 +45,7 @@ this.isActive = true,
   if (ms < 1000) {
     clearInterval(timer);
     startBtn.disabled = false;
+
   }
         }, 1000)
       }
@@ -84,4 +83,3 @@ function convertMs(ms) {
 function addLeadingZero(value) {
    return String(value).padStart(2,0)
 };
-
